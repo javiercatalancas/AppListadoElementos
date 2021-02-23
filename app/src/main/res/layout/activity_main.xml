@@ -41,14 +41,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/add"
+            android:id="@+id/addboton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Añadir nuevo" />
 
         <Button
-            android:id="@+id/delete"
+            android:id="@+id/deleteboton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,23 +62,10 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vistarecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_baseline_delete_24" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
-    </LinearLayout>
+        android:orientation="horizontal"
+        tools:ignore="InvalidId" />
 </LinearLayout>
