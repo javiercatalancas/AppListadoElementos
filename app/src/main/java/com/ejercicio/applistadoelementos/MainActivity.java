@@ -46,13 +46,20 @@ public class MainActivity extends AppCompatActivity {
         vistarecycler.setAdapter(adapter);
 
         Button addbutton = findViewById(R.id.addboton);
+
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               /*
                 String persona = new String("francisco");
-                adapter.(listado.size() , persona);
+               // adapter.add(listado.size(), persona);
 
                 vistarecycler.scrollToPosition(listado.size()-1);
+                */
+
+             // Nos lleva a la segunda pantalla para añadir el texto que luego se mostrará en esta pantalla
+
+
             }
         });
 
