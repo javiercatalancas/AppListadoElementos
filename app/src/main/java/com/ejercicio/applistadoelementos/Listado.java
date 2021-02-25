@@ -3,26 +3,28 @@ package com.ejercicio.applistadoelementos;
 public class Listado {
 
     private String nombre;
-    private String tipo;
+    private int cantidad;
 
-    public Listado(String nombre, String tipo){
+    public Listado(String nombre, int cantidad){
         this.nombre=nombre;
-        this.tipo=tipo;
+        this.cantidad=cantidad;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getCantidad() {
+        return cantidad;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
+
+
 }

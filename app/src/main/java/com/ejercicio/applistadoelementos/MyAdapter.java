@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
 
     // Creamos el listado
 
@@ -25,22 +28,21 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.listado = listado;
     }
 
-    class holder1 extends RecyclerView.ViewHolder {
+    public class MyHolder extends RecyclerView.ViewHolder {
         // AQUI CREAMOS LOS ELEMENTOS DEL HOLDER
-        TextView text1;
-        TextView text2;
+      public TextView text1;
+      public TextView text2;
+      public ImageView delete;
+      public TextView getText1(){
+          return text1;
+      }
 
-        public holder1(@NonNull View itemView) {
+
+        public MyHolder(@NonNull View itemView) {
             super(itemView);
-            text1 = itemView.findViewById(R.id.textView2);
-            text2 = itemView.findViewById(R.id.textView3);
-
-
-        }
-
-        public void setData(String nombre, String tipo) {
-            text1.setText(nombre);
-            text2.setText(tipo);
+            text1 = itemView.findViewById(R.id.textotoast);
+            text2 = itemView.findViewById(R.id.numerotoast);
+            delete =itemView.findViewById(R.id.borrar);
         }
     }
 
@@ -48,26 +50,64 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View viewholder = LayoutInflater.from(contexto).inflate(R.layout.holder1_layout,parent, false);
-        holder1 holderback = new holder1(viewholder);
-        return holderback;
+        View v = LayoutInflater.from(contexto).inflate(R.layout.holder1_layout,parent, false);
+        MyHolder myHolder = new MyHolder(v);
+        return myHolder;
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        MyHolder myHolder = (MyHolder) holder;
+        Listado producto = listado.get(position);
+        myHolder.text1.setText(producto.getNombre());
+        myHolder.text2.setText(String.valueOf(producto.getCantidad()));
+        myHolder.text1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(contexto, myHolder.text1.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        holder1 holderback = (holder1) holder;
-        Listado texto = listado.get(position);
-        String nombre = texto.getNombre();
-        String tipo = texto.getTipo();
-        holderback.setData(nombre, tipo);
-    }
+        myHolder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                remove(myHolder.getAdapterPosition());
+            }
+        });
+
+        }
 
     @Override
     public int getItemCount() {
         return listado.size();
     }
 
+    public void add(int position, Listado item){
+        listado.add(position, item);
+        notifyItemInserted(position);
+    }
+
+    public void add(Listado item){
+        listado.add(item);
+        notifyDataSetChanged();
+    }
+
+    public void remove(int position){
+        listado.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void update(List<Listado> datos){
+        listado.clear();
+        listado =datos;
+        notifyDataSetChanged();
+    }
+
+    public void clearAll(){
+        listado.clear();
+        notifyDataSetChanged();
+    }
 
 
 }
